@@ -1,0 +1,100 @@
+\initchapter{Introducción}\label{chap:intro}
+
+\addcomment{Agregar la introducción de este capítulo.}
+
+\section{Planteamiento del problema}
+
+    La evolución de las \glspl{bci}, así como los sistemas que recopilan información bioeléctrica de las neuronas, han fomentado la creación de herramientas tecnológicas aplicables a otros campos además del médico, es decir, los sectores automotriz, aeronáutico y espacial.
+    
+    Por ejemplo, \citeauthor{MamaniMusaja2018} \cite{MamaniMusaja2018} diseñó en el \citeyear{MamaniMusaja2018} una \acrlong{bci} para controlar el vuelo de una aeronave no tripulada. Al año siguiente, en China se creó otro modelo de control mental aplicado a un cuadricóptero a cargo de \citeauthor{Duan2019} \cite{Duan2019}.
+    
+    Generalmente, los controles implementados en una aeronave requieren de un personal capacitado para operar el vehículo, pero con la integración de una interfaz cerebro-computadora se torna viable que una persona con poca o nula experiencia opere el sistema en cuestión. No obstante, aún existe un amplio margen de investigación sobre este enfoque no médico. Dicho de otra manera, se tiene una documentación limitada o inexistente para estos casos.
+    
+    Por lo anterior, se expone la idea de integrar una \acrlong{bci} a un controlador inteligente del tipo \acrfull{pmr} para el modelo del helicóptero \textit{Quanser}\textregistered\,de \acrfull{2gdl}, centrándose en: ¿cómo obtener y procesar patrones neurofisiológicos para utilizarlos como comandos de referencia en el esquema de control mencionado?
+
+\section{Descripción de la solución propuesta}
+
+    Se plantea utilizar una técnica de identificación y control por medio de un controlador \acrlong{pmr}. Dicho método aprovecha las virtudes de las \textit{wavelets} ``hijas'' como función de activación en una \acrlong{rna} lo cual, a su vez, auto-sintonizará al controlador permitiendo cerrar el lazo de control.
+    
+    \addcomment{Terminar de plantear y ordenar la idea.}
+
+\section{Objetivos de la tesis}
+
+    \subsection*{Objetivo general}
+ 
+        Crear un esquema de control inteligente auto-sintonizable que integre una \acrlong{bci} para el modelo a escala del helicóptero \textit{Quanser} de 2GDL utilizando redes neuronales y la teoría \textit{wavelet}.
+        
+    \subsection*{Objetivos específicos}
+    
+        \begin{itemize}[noitemsep, nolistsep]
+            \item Implementar un controlador \acrlong{pmr},
+            \item validar el control \acrshort{pmr} mediante una simulación numérica y experimental,
+            \item analizar una \acrlong{bci} para la adquisición y procesamiento de las señales de \acrlong{eeg};
+            \item integrar la \acrlong{bci} y el control \acrlong{pmr},
+            \item verificar el funcionamiento del sistema, y
+            \item crear una interfaz de usuario para manejar el sistema de control.
+        \end{itemize}
+
+\section{Justificación}
+
+    Hoy en día existe una cantidad reducida de estudios referentes a los controladores inteligentes con interfaces cerebro-computadora aplicados al campo aeroespacial, los cuales podrían ayudar a disminuir el tiempo de entrenamiento del personal para la operación de algún vehículo aéreo.
+    
+    Entonces, resulta de especial interés realizar experimentos sobre este tipo de controladores inteligentes, ya que contar con mayor experiencia sobre el desempeño de este enfoque permitiría crear nuevas tecnologías utilizables en el sector aeroespacial.
+    
+    Tomando como base este interés, el presente trabajo surge de la necesidad de abordar el diseño de un controlador inteligente con \acrlong{bci} para un helicóptero a escala, pues se busca proporcionar información útil a toda la comunidad tecnológica para mejorar el conocimiento sobre el alcance de estas interfaces y, a su vez, promover la diversificación de sus áreas de aplicación.
+
+\section{Hipótesis}
+
+    Al aplicar la técnica del \acrlong{mra} basado en la teoría \textit{wavelet} sería posible utilizar las características de la señales cerebrales para manipular un modelo a escala del helicóptero \Quanser.
+
+\section{Metodología}
+
+    El diseño de una \acrlong{bci} aplicada al control inteligente del helicóptero \textit{Quanser} se basa en el \acrlong{mra} de señales para determinar los valores de entrada del controlador. Dicho proceso consta de los siguientes pasos \cite{AlonsoValerdi2019,GarciaBlancas2016}:
+    
+    \begin{enumerate}[noitemsep, nolistsep, leftmargin = 15mm, label = \alph*)]
+        \item \textbf{Implementación del controlador \acrlong{pmr}}\\Partiendo del modelo matemático presentado en \cite{GarciaCastro2020}, se aplicará un controlador \acrlong{pmr}.
+        
+        \item \textbf{Validación del controlador modificado}\\Por medio de simulación numérica se validará el funcionamiento del controlador antes mencionado en el prototipo helicóptero \textit{Quanser}. Y posteriormente se realizará la prueba experimental del control.
+        
+        \item \textbf{Adquisición de señales de \acrfull{eeg}}\\A través de un método no invasivo se obtienen lecturas sobre la actividad bioeléctrica generada por los neuronas cerebrales,  por medio del sensor encefalo- gráfico Emotiv Epoc+\textregistered. Se realizarán los experimentos necesarios que permitan determinar las señales electroencefalográficas útiles para reconocer los patrones del movimiento imaginario.
+        
+        \item \textbf{Procesamiento de las señales \acrshort{eeg}}\\Se mejorará la calidad de las señales obtenidas mediante la utilización del \acrlong{mra} basado en la teoría \textit{wavelet}.
+        
+        \item \textbf{Extracción de los impulsos eléctricos característicos}\\La característica de una señal está determinada por su patrón neurofisiológico, una red neuronal detecta este patrón y convierte los impulsos eléctricos en valores numéricos, los cuales serán los datos de entrada del controlador inteligente.
+        
+        \item \textbf{Integración de la \acrlong{bci}}\\Se incorpora la interfaz al esquema de control \acrlong{pmr}, el cual usa las señales del error de seguimiento para compensar las incertidumbres de la planta.
+        
+        \item \textbf{Evaluación del sistema}\\Se estudia analíticamente la convergencia del sistema gracias a la teoría Lyapunov y el funcionamiento se valida con la experimentación en el modelo físico del helicóptero \textit{Quanser}.
+        
+        \item \textbf{Validación de la adaptabilidad del controlador}\\Se verificará el desempeño del sistema y su capacidad de adaptabilidad se realiza una serie de pruebas con diversos usuarios, con base al tiempo disponible en esta fase se harán pruebas con uno o más voluntarios. Finalmente se describen las conclusiones y observaciones para los trabajos a futuro.
+    \end{enumerate}
+
+\section{Alcances}
+
+    Las metas esperadas para este trabajo son:
+    \begin{itemize}[noitemsep, nolistsep, leftmargin = 15mm]
+        \item la utilización de una \acrlong{rna} para aproximar la dinámica de la planta y así prescindir de sus funciones de transferencia;
+        \item la implementación de un controlador \acrlong{pmr} para la estabilización y seguimiento de trayectorias de este modelo a escala;
+        \item por último, el diseño de un algoritmo de baja carga computacional que utilice el \acrlong{mra} para el tratamiento de las señales de \acrlong{eeg}.
+    \end{itemize}
+    
+\section{Limitaciones}
+    
+    Algunos aspectos a considerar durante el desarrollo de este trabajo son:
+    \begin{itemize}[noitemsep, nolistsep, leftmargin = 15mm]
+        \item la carencia de información debido a que se han desarrollado pocas investigaciones internacionales y nacionales sobre este tipo de aplicaciones que combinen las interfaces cerebro-computadora, el \acrlong{mra} y las redes neuronales artificiales para el control de un modelo a escala del helicóptero \textit{Quanser} de \acrshort{2gdl};
+        \item la sintonización de los parámetros iniciales de las redes neuronales es realizada fuera de línea y de manera empírica, estos parámetros son los pesos sinápticos, escalamientos, traslaciones y coeficientes en los bancos de filtros;
+        \item además, en primera instancia se desconoce la cantidad de neuronas requeridas para la \acrlong{rna} que realizará la identificación de la dinámica de la planta;
+        \item los comandos de referencia para el controlador serán solo las señales de \acrlong{eeg};
+        \item y con cada nuevo usuario se debe llevar a cabo un nuevo proceso de entrenamiento para la red neuronal;
+        \item finalmente, el trabajo se centrará en el diseño de los algoritmos para la adquisición y el tratamiento de las señales cerebrales así como para el control automático del modelo a escala; y
+        \item las pruebas se realizarán en tierra ya que el modelo experimental así lo exige.
+    \end{itemize}
+    
+\section{Aportaciones}
+
+    Las contribuciones de esta investigación son el diseño e implementación de una interfaz de usuario para la ley de control BCI-PMR en el entorno de \acrlong{labview} (\acrshort{labview}\textregistered) aplicada al helicóptero \textit{Quanser} de \acrshort{2gdl} y la publicación de los resultados en una revista.
+
+\section{Organización de la tesis}
+
+    El \textit{Estado del arte} se encuentra en el capítulo \ref{chap:state art}, donde se analizan los trabajos relacionados con los temas de investigación de esta tesis. En el capítulo \ref{chap:theory} se presenta el \textit{Marco teórico} de las áreas de conocimiento involucradas. Enseguida, se tratarán el \textit{Diseño del controlador proporcional multiresolución} y el \textit{Diseño de la interfaz cerebro-computadora} en los capítulos \ref{chap:pmr ctrl} y \ref{chap:design bci}, respectivamente. Finalmente, se tienen las \textit{Conclusiones} en el capítulo \ref{chap:concl}, donde se exponen algunas recomendaciones para el trabajo a futuro.

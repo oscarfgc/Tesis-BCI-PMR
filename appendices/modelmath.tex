@@ -1,0 +1,18 @@
+\initappendix{Modelado matemático del helicóptero \textit{Quanser}}\label{app:model math}
+
+En esta sección se expone de manera breve el análisis matemático del helicóptero de \acrfull{2gdl} de la empresa \textit{Quanser}, ya que de esta manera se obtienen las funciones de transferencia utilizadas para la simulación de la planta.
+
+\section{Modelo matemático no lineal}
+
+Se habla de no linealidad cuando un sistema físico o matemático posee ecuaciones de movimiento o evolución que están descritas por expresiones no lineales.
+
+En la mayoría de los casos los fenómenos estudiados son implícitamente no lineales, por lo cual el modelo con el que se trabajó en esta tesis no fue la excepción ya que su dinámica se expresa de la siguiente manera:
+
+\begin{align}
+   \label{equa:ddot-theta2}
+   \ddot{\theta} &= \dfrac{K_{pp}V_{mp}+K_{py}V_{my}-m_{hel}V_{mp}gl_{cm}\cos\theta - B_p\dot{\theta}- m_{hel}l_{cm}^2\sin\theta\cos\theta\dot{\phi}^2} {J_{eqp}+m_{hel}l_{cm}^2} \\
+   \label{equa:ddot-phi2}
+   \ddot{\phi} &= \dfrac{K_{yp}V_{mp}+K_{yy}V_{my}-B_y\dot{\phi}+2m_{hel}l_{cm}^2\sin\theta\cos\theta\dot{\phi}\dot{\theta}} {J_{eqy}+m_{hel}l_{cm}^2\cos\theta}
+\end{align}
+
+Además, \citet[pp. 42-43]{Ogata2010} expresa que a un sistema no lineal es difícil aplicarle el principio de superposición, es decir, resulta poco viable tratar cada salida como una sola a la vez y sumar sus resultados. Por tanto, en la ingeniería de control, un proceso normal es linealizar del modelo matemático, existen diversas técnicas pero un por ejemplo es el uso de las series de Taylor alrededor de un punto de operación seleccionando el término lineal, de este modo lo exponen en su trabajo \citet{VillarealGrajales2017}.

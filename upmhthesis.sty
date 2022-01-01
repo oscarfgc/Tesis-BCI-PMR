@@ -1,0 +1,701 @@
+% ====================================================================
+% MoAE-UPMH Thesis
+% LaTeX Template - Version 2.0 (15/09/2021)
+%
+% Adapted to MoAE-UPMH requirements by Oscar Federico García Castro
+%
+% Contact: 213220003@upmh.edu.mx / Telegram: @Oscar_Federico
+%
+% Template license:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% ====================================================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{upmhthesis}[2021/05/27 Thesis template]
+
+% ====================================================================
+% PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+% ====================================================================
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[spanish,es-nodecimaldot,es-tabla,english]{babel}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{eurosym}
+
+% \RequirePackage[shellescape]{gmp} % MetaPost
+% \RequirePackage{pstricks}
+\RequirePackage[all]{xy}
+
+\RequirePackage{xcolor,graphicx,tikz} % Images, plots, colors
+\RequirePackage{lmodern,emptypage}
+\RequirePackage{float,subcaption}
+\RequirePackage[margin = 15pt, font = small, labelfont = bf]{caption}
+
+\RequirePackage{titlesec,microtype}
+\RequirePackage{fancyhdr}
+\RequirePackage{tocloft,calc}
+\RequirePackage{amssymb,amsmath,amsbsy,amsfonts,mathdots,mathrsfs,amsthm}
+\RequirePackage{eqexpl,eucal,cancel}
+\RequirePackage{hyperref,bookmark}
+\RequirePackage[spanish]{cleveref}
+\RequirePackage{suffix}
+
+\crefname{section}{sección}{secciones}
+\Crefname{section}{Sección}{Secciones}
+
+\RequirePackage[spanish]{nomencl}
+\RequirePackage[acronym,toc,nonumberlist]{glossaries}
+\RequirePackage{listings}
+
+\RequirePackage{makeidx}
+\RequirePackage{tablefootnote,threeparttable,longtable,multicol,multirow}
+\RequirePackage{setspace}
+\RequirePackage[nottoc,notlot,notlof]{tocbibind}
+\RequirePackage{enumitem}
+\RequirePackage{libertine}
+
+\RequirePackage[none]{hyphenat}
+\RequirePackage[autostyle   = false,
+                german      = quotes]{csquotes}
+                
+\RequirePackage[backend      = biber,
+                sorting      = none,
+                citestyle    = ieee,
+                bibstyle     = ieee,
+                sortcites,
+                style        = ieee,
+                natbib       = true,
+                maxbibnames  = 9,
+                maxcitenames = 2,
+                mincitenames = 1,
+                uniquelist   = false,
+                doi          = false]{biblatex}
+                
+\DefineBibliographyStrings{spanish}{
+    andothers = {et\addabbrvspace al\adddot},
+    and       = {y}
+}
+
+\RequirePackage{latexsym,sidecap,pgfplots,array,siunitx}
+
+\RequirePackage[framemethod = default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
+
+\RequirePackage[bottom]{footmisc}
+    \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+    \counterwithin*{footnote}{chapter}
+    
+\newcommand{\addcomment}[1]{{\Large\itshape\textcolor{red}{#1}}}
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\diamond$}
+\renewcommand{\labelitemiii}{$\ast$}
+\renewcommand{\labelitemiv}{$-$}
+
+\@ifpackageloaded{geometry}{}{\RequirePackage[pass]{geometry}}
+    \emergencystretch = 1em
+    \graphicspath{{./graphics/}}
+    \DeclareGraphicsExtensions{.png, .jpg, .pdf, .eps, .svg, .mps}
+
+    % ================================================================
+    % DEFINITION OF COLORS
+    % ================================================================
+    \definecolor{mia_blue}{RGB}{37,73,114}
+    \definecolor{line_color}{rgb}{0.82, 0.41, 0.12} % For theorems, etc.
+    
+    \definecolor{brandeblue}{rgb}{0.0, 0.44, 1.0}
+    \definecolor{bostonred}{rgb}{0.8, 0.0, 0.0}
+    \definecolor{goldenpoppy}{rgb}{0.99, 0.76, 0.0}
+    \definecolor{orange}{rgb}{1.0, 0.31, 0.0}
+    \definecolor{britishggreen}{rgb}{0.0, 0.26, 0.15}
+    \definecolor{indiagreen}{rgb}{0.07, 0.53, 0.03}
+    \definecolor{indigo}{rgb}{0.0, 0.25, 0.42}
+    \definecolor{darkorchid}{rgb}{0.6, 0.2, 0.8}
+    
+    % ================================================================
+    % THESIS INFORMATION
+    % ================================================================
+    \newcommand*{\university}[1]{\gdef\@university{#1}}
+    \newcommand*{\faculty}[1]{\gdef\@faculty{#1}}
+    \newcommand*{\degree}[1]{\gdef\@degree{#1}}
+    \newcommand*{\supervisor}[1]{\gdef\@supervisor{#1}}
+    \newcommand*{\cityandyear}[1]{\gdef\@cityandyear{#1}}
+    \newcommand*{\logouniversity}[1]{\gdef\@logouniversity{#1}}
+    \newcommand*{\logoconacyt}[1]{\gdef\@logoconacyt{#1}}
+    \newcommand*{\logofaculty}[1]{\gdef\@logofaculty{#1}}
+    \newcommand*{\subject}[1]{\gdef\@subject{#1}}
+    \newcommand*{\keywords}[1]{\gdef\@keywords{#1}}
+
+    \newcommand*{\@university}{\texttt{\string\university}Instituto}
+    \newcommand*{\@faculty}{\texttt{\string\faculty}Facultad o Instituto}
+    \newcommand*{\@degree}{\texttt{\string\degree}Grado de estudios}
+    \newcommand*{\@supervisor}{\texttt{\string\supervisor}Supervisor}
+    \newcommand*{\@cityandyear}{\texttt{\string\cityandyear}Lugar y fecha}
+    \newcommand*{\@logouniversity}{example-A}
+    \newcommand*{\@logofaculty}{example-B}
+    \newcommand*{\@logoconacyt}{example-C}
+    \newcommand*{\@subject}{Tema de investigación}
+    \newcommand*{\@keywords}{Palabras clave}
+
+    \newcommand*{\universityEN}[1]{\gdef\@universityEN{#1}}
+    \newcommand*{\facultyEN}[1]{\gdef\@facultyEN{#1}}
+    \newcommand*{\titleEN}[1]{\gdef\@titleEN{#1}}
+    \newcommand*{\authorEN}[1]{\gdef\@authorEN{#1}}
+    \newcommand*{\keywordsEN}[1]{\gdef\@keywordsEN{#1}}
+    
+    \newcommand*{\@universityEN}{\texttt{\string\universityEN}University}
+    \newcommand*{\@facultyEN}{\texttt{\string\facultyEN}Institute}
+    \newcommand*{\@titleEN}{\texttt{\string\titleEN}Title}
+    \newcommand*{\@authorEN}{\texttt{\string\authorEN}Author}
+    \newcommand*{\@keywordsEN}{\texttt{\string\keywordsEN}Keywords}
+    % ================================================================
+    % COVER PAGE
+    % ================================================================
+    \renewcommand*{\maketitle}{
+        \pagenumbering{Alph}
+        \setcounter{page}{1}
+        \thispdfpagelabel{C}
+        \pdfbookmark[0]{Portada}{Portada}
+        \begin{titlepage}
+            \newgeometry{margin = 0.75in}
+            \noindent
+            \hspace{0mm}
+            \begin{minipage}[c][0.15\textheight][c]{\textwidth}
+                \noindent
+                \begin{minipage}[t][0.15\textheight][c]{2.5cm}
+                    \includegraphics[height = 2cm]{\@logouniversity}
+                \end{minipage}\hspace{5mm}
+                \begin{minipage}[t][0.15\textheight][c]{0.65\textwidth}
+                    \centering
+                    \vspace{3cm}{\large\scshape \@university\par}
+                    \vspace{5mm}{\color{mia_blue}\hrule height4pt}
+                    \vspace{2mm}{\color{mia_blue}\hrule height1pt}
+                    \vspace{5mm}{\large\scshape\@faculty\unskip\par}
+                    \vspace{24mm}
+                \end{minipage}\hspace{5mm}
+                \begin{minipage}[t][0.15\textheight][c]{2.5cm}
+                    \includegraphics[height = 2.5cm]{\@logofaculty}
+                \end{minipage}
+            \end{minipage}
+            
+            \vspace{2cm}
+
+            \hspace{0.14\textwidth}
+            \begin{minipage}[c][0.65\textheight][t]{0.64\textwidth}
+                \begin{center}
+                    {\Large\scshape\@title}\\[20mm]
+                    \textsc{\LARGE T\hspace{15mm}E\hspace{15mm}S\hspace{15mm}I\hspace{15mm}S}\\[10mm]
+                    \textsc{\large PARA OBTENER EL TÍTULO DE:}\\[5mm]
+                    \textsc{\large \@degree}\\[10mm]
+                    \textsc{\large\textbf{P R E S E N T A}}\\[2.5mm]
+                    \textsc{\large\textbf\scshape\@author}\\[20mm]
+                    {\large\scshape ASESORES:\\[0.3cm] {\@supervisor}}\\[1in]
+                    {\scshape\@cityandyear}
+                    \vspace{.99cm}
+                \end{center}
+            \end{minipage}
+        \end{titlepage}
+    
+    % ================================================================
+    % TITLE PAGE
+    % ================================================================
+        \cleardoublepage
+        \begin{titlepage}
+	        \newgeometry{left = 3cm, right = 3.5cm, bottom = 4.5cm, top = 4.5cm}
+            \noindent
+            \begin{minipage}[c][0.99\textheight][c]{0.125\textwidth}%
+                \noindent\begin{minipage}[t][0.15\textheight][c]{\textwidth}
+                    \begin{center}
+                        \includegraphics[height = 15mm]{\@logouniversity}\\[0.5cm]
+                        \includegraphics[height = 20mm]{\@logofaculty}\\[0.5cm]
+                        \includegraphics[height = 20mm]{\@logoconacyt}
+                    \end{center}
+                    \vspace{15.5cm}
+                \end{minipage}%
+                \noindent\begin{minipage}[c][0.66\textheight][c]{0.65\textwidth}
+                \begin{center}
+                    \color{mia_blue}
+                    \hskip5mm
+                    \vrule width4pt height\textheight
+                    \hskip2mm
+                    \vrule width1pt height\textheight
+                \end{center}
+            \end{minipage}%
+        \end{minipage}
+        \hspace{15mm}
+        \begin{minipage}[c][0.99\textheight][t]{0.8\textwidth}
+            \vspace{2cm}
+            \begin{flushleft}
+                \textit{\@title}, \@author \\[2em]
+                Esta tesis fue preparada en \LaTeX\,usando la plantilla \href{https://github.com/CamusSG/Tesis-UPMH.git}{upmhthesis} (v2.1).\\
+                Contiene un total de X páginas.\\
+                Compilada el \@date.
+            \end{flushleft}
+            \vfill
+            \end{minipage}
+        \end{titlepage}
+    }
+
+    % ================================================================
+    % MARGIN SETTINGS
+    % ================================================================
+    \newgeometry{
+        top     =   1in,
+        bottom  =   1in,
+        outer   =   1in,
+        inner   =   1.5in,
+    }
+    \setlength{\headheight}{0.75cm}
+    \setlength{\headsep}{0.5cm}
+    
+    % ================================================================
+    % HYPERREF SETTINGS
+    % ================================================================
+    \hypersetup{
+        bookmarksopen       = false,
+        bookmarksnumbered   = true,
+        breaklinks          = true,
+        colorlinks          = true,
+        linkcolor           = blue!60!black,
+        urlcolor            = blue!60!black,
+        citecolor           = red!60!black,
+        anchorcolor         = green!50!black,
+        linktocpage         = true,
+    }
+    \phantomsection
+    \glsdisablehyper
+    
+    \newrobustcmd*{\citefirstlastauthor}{\AtNextCite{\DeclareNameAlias{labelname}{given-family}}\citet}
+    
+    \crefname{table}{tabla}{tablas}
+    \addbibresource{references/library.bib}
+    \addbibresource{references/books.bib}
+    \addbibresource{references/thesis.bib}
+    \addbibresource{references/articles.bib}
+    
+    % ================================================================
+    % HEADER SETTINGS
+    % ================================================================
+    \pagestyle{fancy}
+    \renewcommand{\sectionmark}[1]{\markright{\thesection\,#1}}
+    
+    \newcommand{\headerEmpty}[1]{
+        \lhead[\textit{#1}]{~}
+        \rhead[~]{\textit{#1}}
+    }
+    
+    \newcommand{\headerChapters}{
+        \lhead[\textit{Sección\,\rightmark}]{~}
+        \rhead[~]{\textit{\leftmark}}
+    }
+    
+    \addtolength{\headheight}{0.5pt}
+    \fancypagestyle{plain}{
+        \fancyhead{}
+        \renewcommand{\headrulewidth}{0pt}}
+        
+    % ================================================================
+    % TABLE OF CONTENT SETTINGS
+    % ================================================================
+    \makeatletter
+        \renewcommand{\@pnumwidth}{1cm}
+        % \renewcommand{\@tocrmarg}{4cm}
+        % \renewcommand{\cftdotsep}{\cftnodots}
+    \makeatother
+
+    \renewcommand{\cftchappresnum}{\chaptername\space}
+    \setlength{\cftchapnumwidth}{\widthof{\textbf{Apéndice\,999\,}}}
+    
+    \makeatletter\g@addto@macro\appendix{
+        \addtocontents{toc}{
+            \protect\renewcommand{\protect\cftchappresnum}{\appendixname\space}
+        }
+    }
+
+    \newcommand\appendixsetup{
+        \cleardoublepage
+        \renewcommand{\appendixname}{Apéndice}
+        \setcounter{chapter}{0}
+        \addtocontents{toc}{
+            \protect\renewcommand{\protect\cftchappresnum}{\appendixname\space}
+        }
+    }
+
+    % ================================================================
+    % CHAPTER TITLE SETTINGS
+    % ================================================================
+    \definecolor{titlecolor}{RGB}{0,0,0}
+    \newcommand{\chaptertitlerule}{
+        \color{titlecolor}\titlerule[2.5pt] \vskip3pt\titlerule\vskip4pt\Huge\textbf}
+    
+    \newcommand{\formatchaptermain}{
+        \titleformat{\chapter}[display]
+        {\normalfont\bfseries\color{titlecolor}}
+        {\filleft
+        \begin{tikzpicture}
+            \node[
+                outer sep       = 0pt,
+                text width      = 2.5cm,
+                minimum height  = 3cm,
+                fill            = titlecolor,
+                font            = \color{white}\fontsize{80}{90}\selectfont,
+                align           = center
+            ] (num) {\thechapter};
+            \node[
+               rotate           = 90,
+               anchor           = south,
+               font             = \color{black}\large\normalfont
+            ] at ([xshift=-5pt]num.west) {\textls[180]{\textsc{\chaptertitlename}}};
+         \end{tikzpicture}%
+        }
+        {-1pt}
+        {\chaptertitlerule}
+    }
+    
+    \newcommand{\initchapter}[1]{
+        \chapter{#1}
+        \markboth{Cap\'itulo~\thechapter.~#1}{}}
+        
+    \newcommand{\initchapterlong}[2]{
+        \chapter[#1]{#2}
+        \markboth{Cap\'itulo~\thechapter.~#1}{}}
+
+    \WithSuffix\newcommand\initchapter*[2]{
+        \chapter*{#1}
+        \addcontentsline{toc}{chapter}{#1}
+        \markboth{#1}{}}
+
+    \newcommand{\initappendix}[1]{
+        \chapter{#1}
+        \markboth{Ap\'endice~\thechapter.~#1}{}}
+        
+    % ================================================================
+    % SECTION TITLE SETTINGS
+    % ================================================================
+    \newcommand{\pagelinknum}{\cleardoublepage\phantomsection}
+
+    \newcommand{\prefchapter}[1]{
+        \bookmarksetup{startatroot}
+        \pagelinknum
+        \chapter*{#1}
+        \addcontentsline{toc}{section}{#1}}
+        
+    \newcommand{\formatsectionmain}{
+        \titleformat{\section}[hang]
+            {\color{titlecolor}\large\bfseries
+            \begingroup
+                \setlength{\titlewidth}{3cm}
+                \titleline*[l]{\titlerule[.4pc]}
+                \setlength{\titlewidth}{\columnwidth}
+                \vspace{-1pt}
+                \titlerule[2.5pt]\vskip6pt
+            \endgroup}
+            {\thesection}
+            {15pt}
+            {\color{titlecolor}}
+    }
+
+    % ================================================================
+    % NOMENCLATURE SETTINGS
+    % ================================================================
+    \makenomenclature
+    \makeglossaries
+    
+    \renewcommand{\nomname}{Notaci\'on}
+    \setlength{\glsdescwidth}{0.6\textwidth}
+    \setlength{\glspagelistwidth}{0.2\textwidth}
+    \setlength{\nomitemsep}{-0.85\parsep}
+    
+    \input{backmatter/notation}
+    \input{backmatter/abbrev}
+    \loadglsentries{backmatter/glossary}
+    \loadglsentries{backmatter/acronyms}
+    
+    \renewcommand\nomgroup[1]{
+        \item[\bfseries
+        \ifstrequal{#1}{A}{}{
+        \ifstrequal{#1}{B}{}{
+        \ifstrequal{#1}{O}{Other Symbols}{}}}
+    ]}
+
+    % ================================================================
+    % NEURAL NETWORK SETTINGS
+    % ================================================================
+    \pgfplotsset{compat = newest} % Allows to place the legend below plot
+    \usepgfplotslibrary{units} % Allows to enter the units nicely
+    \usetikzlibrary{decorations.pathreplacing}
+    \usetikzlibrary{arrows, decorations.markings}
+    \usetikzlibrary{fadings}
+    \AtBeginEnvironment{tikzpicture}{\shorthandoff{>}
+        \shorthandoff{<}}{}{}
+    
+    % ================================================================
+    %	ABSTRACT PAGE DESIGN
+    % ================================================================
+    \newenvironment{abstractES}{
+	    \renewcommand{\headrulewidth}{0pt}
+	    \bookmarksetup{startatroot}
+        \pagelinknum
+        \addcontentsline{toc}{section}{\abstractname}
+	    \begin{center}
+	        \bigskip
+	        {\huge\textit{\abstractname} \par}
+	        \bigskip
+	        {\normalsize\@faculty\par}
+	        \medskip
+	        {\normalsize\scshape\@university\par}
+	        \bigskip
+	        {\normalsize\bfseries\@title \par}
+	        \medskip
+	        {\normalsize por \@author \par}
+	        \bigskip
+        \end{center}
+    }
+    {\\[2em]\textbf{Palabras clave}: \@keywords}
+    
+    \newenvironment{abstractEN}{
+        \begin{otherlanguage}{english}
+	    \renewcommand{\headrulewidth}{0pt}
+	    \bookmarksetup{startatroot}
+        \pagelinknum
+        \addcontentsline{toc}{section}{Abstract}
+	    \begin{center}
+	        \bigskip
+	        {\huge\textit{Abstract} \par}
+	        \bigskip
+	        {\normalsize\@facultyEN\par}
+	        \medskip
+	        {\normalsize\scshape\@universityEN\par}
+	        \bigskip
+	        {\normalsize\bfseries\@titleEN \par}
+	        \medskip
+	        {\normalsize by \@authorEN \par}
+	        \bigskip
+        \end{center}
+        \end{otherlanguage}
+    }
+    {\\[2em]\textbf{Keywords}: \@keywordsEN}
+    
+    % ================================================================
+    %	ACKNOWLEDGEMENT PAGE DESIGN
+    % ================================================================
+    \newcommand{\acknowname}{Agradecimientos}
+    \newenvironment{acknowledgements}{
+	    \bookmarksetup{startatroot}
+        \pagelinknum
+        \addcontentsline{toc}{section}{\acknowname}
+        \renewcommand{\headrulewidth}{0pt}
+	    \begin{center}
+	        \bigskip
+	        {\huge\textit{\acknowname} \par}
+	        \bigskip
+	        \bigskip
+        \end{center}
+    }
+    {}
+    
+    % ================================================================
+    %	DEDICATION PAGE DESIGN
+    % ================================================================
+    \newcommand\dedicatory[1]{
+        \renewcommand{\headrulewidth}{0pt}
+	    \null\vfil
+	    \begin{center}{\Large\slshape #1}\end{center}
+	    \vfil\null
+    }
+    
+    \newcommand{\authorshipname}{Declaración}
+    \newenvironment{declaration}{
+	    \bookmarksetup{startatroot}
+        \pagelinknum
+        \addcontentsline{toc}{section}{\authorshipname}
+        \renewcommand{\headrulewidth}{0pt}
+    {\begin{center}
+        {\huge\textit{\authorshipname}\par\vspace{20pt}}
+    \end{center}}
+    }{}
+    
+    % ================================================================
+    %	MATH SYMBOLS
+    % ================================================================
+    \newcommand{\cinterval}[2]{\ensuremath{[#1,#2]}}
+    \newcommand{\laplace}[1]{\ensuremath{\displaystyle\mathscr{L} \left\{ #1 \right\} }}
+    \newcommand{\invlaplace}[1]{\ensuremath{\displaystyle\mathscr{L}^{-1} \left\{ #1 \right\} }}
+    \newcommand{\rst}[1]{\ensuremath{\tcboxmath[colback = gray!20!white, colframe = brandeisblue!70]{#1}}}
+    
+    \newcommand\cancl[2][blue!80]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+    \newcommand\bcancl[2][blue!80]{\renewcommand\CancelColor{\color{#1}}\bcancel{#2}}
+    \newcommand\canclto[3][blue!80]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
+    \newcommand{\vectors}[1][v]{\ensuremath{\mathbf{#1} = (\foreach \i in {1,2,3}{#1_{\i}+} \cdots + #1_{n})}}
+	\newcommand{\vectspace}[2][R]{\ensuremath{\mathbb{#1}^{#2}}}
+	
+	\raggedbottom
+    \allowdisplaybreaks
+    \spanishdecimal{.}
+    
+    \eqexplSetIntro{donde}  % set parenthesis in the left of the first item
+    \eqexplSetDelim{:}      % set delimiter to ":"
+	
+	% ================================================================
+    % MATH ENVIROMENT SETTINGS
+    % ================================================================
+    % Boxed/framed enviroments
+    \newtheoremstyle{bluenumbox}    % Theorem style name
+	    {0pt}                       % Space above
+	    {0pt}                       % Space below
+        {\normalfont}               % Body font
+	    {}                          % Indent amount
+	    {\small\bf\color{mia_blue}} % Theorem head font
+	    {\;}                        % Punctuation after theorem head
+	    {0.25em}                    % Space after theorem head
+	    {\small\color{mia_blue}\thmname{#1}\nobreakspace\thmnumber{#2}~#3} % Optional theorem note
+	
+    \newtheoremstyle{colornumbox}   % Theorem style name
+        {0pt}                       % Space above
+        {0pt}                       % Space below
+        {\normalfont}               % Body font
+	    {}                          % Indent amount
+	    {\small\bf\color{mia_blue}} % Theorem head font
+	    {\;}                        % Punctuation after theorem head
+	    {0.25em}                    % Space after theorem head
+	    {\small\color{mia_blue}\thmname{#1}\nobreakspace\thmnumber{#2}~#3} % Optional theorem note
+        
+    \newtheoremstyle{blacknumex}    % Theorem style name
+	    {5pt}                       % Space above
+	    {5pt}                       % Space below
+	    {\normalfont}               % Body font
+	    {}                          % Indent amount
+	    {\small\bf}                 % Theorem head font
+	    {\;}                        % Punctuation after theorem head
+	    {0.25em}                    % Space after theorem head
+	    {\small\nobreakspace\thmname{#1}\nobreakspace\thmnumber{#2} #3} % Optional theorem note
+
+    \newtheoremstyle{blacknumbox}   % Theorem style name
+	    {0pt}                       % Space above
+	    {0pt}                       % Space below
+	    {\normalfont\itshape}       % Body font
+	    {}                          % Indent amount
+	    {\small\bf}                 % Theorem head font
+	    {\;}                        % Punctuation after theorem head
+	    {0.25em}                    % Space after theorem head
+	    {\small\thmname{#1}\nobreakspace\thmnumber{#2}.~(#3)}
+
+    % Non-boxed/non-framed environments
+    \newtheoremstyle{bluenum}       % Theorem style name
+        {5pt}                       % Space above
+        {5pt}                       % Space below
+        {\normalfont}               % Body font
+        {}                          % Indent amount
+        {\small\bf\color{mia_blue}} % Theorem head font
+        {\;}                        % Punctuation after theorem head
+        {0.25em}                    % Space after theorem head
+        {\small\color{mia_blue}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}         % Theorem text (e.g. Theorem 2.1)
+        \thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}}     % Optional theorem note
+    \makeatother
+    
+    % Defines the theorem text style for each type of theorem to one of the three styles above
+    \newcounter{dummy}
+	\numberwithin{dummy}{chapter}
+    \theoremstyle{bluenumbox}
+	    \newtheorem{theoremeT}[dummy]{Teorema}
+	    \newtheorem{problem}{Problema}[chapter]
+	    \newtheorem{exerciseT}{Ejercicio}[chapter]
+
+    \theoremstyle{blacknumex}
+	    \newtheorem{exampleT}{Ejemplo}[chapter]
+
+    \theoremstyle{blacknumbox}
+	    \newtheorem{definitionT}{Definici\'on}[chapter]
+	    \newtheorem{corollaryT}[dummy]{Corolario}
+
+    \theoremstyle{bluenum}
+	    \newtheorem{proposition}[dummy]{Proposition}
+    
+    % =====	DEFINITION OF COLORED BOXES =====
+    % Theorem box
+    \newmdenv[	skipabove			= 7pt,
+		        skipbelow			= 7pt,
+		        backgroundcolor		= white,
+		        linecolor			= black!50,
+		        innerleftmargin		= 5pt,
+		        innerrightmargin	= 5pt,
+			    innertopmargin		= 5pt,
+			    leftmargin			= 0cm,
+			    rightmargin			= 0cm,
+			    innerbottommargin	= 5pt]{tBox}
+
+    % Exercise box
+    \newmdenv[	skipabove			= 7pt,
+	    		skipbelow			= 7pt,
+		    	rightline			= false,
+			    leftline			= true,
+			    topline				= false,
+			    bottomline			= false,
+			    backgroundcolor		= mia_blue!10,
+			    linecolor			= mia_blue,
+			    innerleftmargin		= 5pt,
+			    innerrightmargin	= 5pt,
+			    innertopmargin		= 5pt,
+			    innerbottommargin	= 5pt,
+			    leftmargin			= 0cm,
+			    rightmargin			= 0cm,
+			    linewidth			= 4pt]{eBox}
+
+    % Definition box
+    \newmdenv[  skipabove           = 7pt,
+                skipbelow           = 7pt,
+                rightline           = false,
+                leftline            = true,
+                topline             = false,
+                bottomline          = false,
+                linecolor           = mia_blue,
+                innerleftmargin     = 5pt,
+                innerrightmargin    = 5pt,
+                innertopmargin      = 0pt,
+                leftmargin          = 0cm,
+                rightmargin         = 0cm,
+                linewidth           = 4pt,
+                innerbottommargin   = 0pt]{dBox}
+
+    % Corollary box
+    \newmdenv[  skipabove           = 7pt,
+                skipbelow           = 7pt,
+                rightline           = false,
+                leftline            = true,
+                topline             = false,
+                bottomline          = false,
+                linecolor           = gray,
+                backgroundcolor     = black!5,
+                innerleftmargin     = 5pt,
+                innerrightmargin    = 5pt,
+                innertopmargin      = 5pt,
+                leftmargin          = 0cm,
+                rightmargin         = 0cm,
+                linewidth           = 4pt,
+                innerbottommargin   = 5pt]{cBox}
+
+    % Creates an environment for each type of theorem and assigns it a theorem text style from the "Theorem Styles" section above and a colored box from above
+    \newenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
+    \newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{mia_blue}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}
+    \newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}
+    \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
+    \newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
+    
+    \newcommand{\matrixstate}[7]{
+        \begin{table}[htb!]
+            \centering
+            \begin{tabular}{|r|p{0.775\textwidth}|}
+                \hline
+                Título      & \citetitle{#1} \\ \hline
+                Autor       & \citeauthor{#1} \\ \hline
+                Año         & \citeyear{#1} \\ \hline
+                Objetivos   & #2 \\ \hline
+                Muestra     & #3 \\ \hline
+                Metodología & #4 \\ \hline
+                Técnica     & #5 \\ \hline
+                Resultados  & #6 \\ \hline
+                Referencias & #7 \\ \hline
+            \end{tabular}
+        \end{table}
+    }
+% ================================================================
+\endinput
+% ================================================================

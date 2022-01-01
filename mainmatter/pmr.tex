@@ -1,0 +1,123 @@
+\initchapterlong
+    {Diseño del controlador proporcional multiresolución}
+    {Diseño del controlador proporcional \\multiresolución}\label{chap:pmr ctrl}
+
+% \initchapter{Diseño del controlador proporcional multiresolución}\label{chap:pmr ctrl}
+
+El controlador \acrfull{pmr} es similar al \acrfull{pid} expuesto en \citetitle{GarciaCastro2020} \cite{GarciaCastro2020}, pues ambos utilizan una estructura similar tanto para su \acrlong{rna} como para los filtros de \acrfull{iir}. Sin embargo, ahora para obtener una nueva señal de control solo se depende del error de seguimiento, el cual se descompone dentro del espacio de escala-frecuencia resultando en diversas señales que son escaladas y sumadas. Además, el esquema \acrshort{pid} se limita a tres componentes, pero el control PMR define la cantidad de ganancia a utilizar según sus necesidades, por lo que es natural pensar que el nivel de detalle mejora durante el análisis de las señales.
+
+En esta ocasión se expone el procedimiento empleado que consta de la base matemática, esquemas de control y reglas de sintonización plasmadas en la \cref{sec:PMR_control}; después, en los apartados \ref{sec:PMR_outline} y \ref{sec:PMR_online} se exponen los resultados obtenidos con respecto a las simulaciones y pruebas en el modelo físico.
+
+\section{Esquema de identificación y control automático}\label{sec:PMR_control}
+    
+    Primero se debe aclarar que la dinámica de la planta se menciona en el \cref{app:model math}. Al tener una estructura similar a la que se mostró en el capítulo anterior se realizó la adaptación del esquema de bloques, generando el diagrama de la \cref{fig:schematicControlPMR} así como las señales empleadas que se definen en la \cref{tab:schematicControlPMR}.
+        
+    \begin{longtable}{cl}
+        \caption[Señales para los controladores proporcional multiresolución]{Señales empleadas para los controladores proporcionales multiresolución.}
+        \label{tab:schematicControlPMR} \\
+        \hline
+        \textbf{Símbolo} & \textbf{Descripción}\\ \\
+        \hline
+        \endfirsthead
+        
+        \multicolumn{2}{c}{\tablename\ \thetable\ -- \textit{Continua desde la página previa}} \\
+        \hline
+        \textbf{Símbolo} & \textbf{Descripción}\\ \\
+        \hline
+        \endhead
+
+        \hline \multicolumn{2}{r}{\textit{Continua en la siguiente página}} \\
+        \endfoot
+            
+        \hline
+        \endlastfoot
+            
+        $y_{r},~\hat{y},~y$ & Señal de referencia, estimada y salida de la planta, respectivamente \\ \hline
+        $\varepsilon$ & Señal de seguimiento del error \\ \hline
+        $u$ & Señal de control \\ \hline
+        $e$ & Señal de error estimada \\ \hline
+        $v$ & Señal persistente (evita que la red caiga en singularidades) \\ \hline
+        $\hat{\Gamma}$ & Señal de ajuste de las ganancias \\ \hline
+        $K_i$ & Señales de las ganancias para cada escalamiento \\ \hline
+    \end{longtable}
+    
+    \begin{figure}[H]
+        \centering
+        \input{tikz/pmr_chapter/block_dia}
+        \caption[Diagrama de bloques de los controladores PMR.]{Diagrama de bloques de los controladores proporcionales multiresolución.}
+        \label{fig:schematicControlPMR}
+    \end{figure}
+        
+     En palabras de \citeauthor{VegaNavarrete2013}, la señal de error se descompone en señales a diferentes niveles, la cuales se escalan con sus respectivas ganancias y al ser sumadas se obtiene la señal de control, que está expresada por \cite[p. 43]{VegaNavarrete2013} la siguiente ecuación
+    \begin{equation}
+        u(k) = \sum\limits_{i=1}^{N+1} K_i \varepsilon_i(k)
+    \end{equation}
+    \begin{eqexpl}
+        \item{$N$} indica el nivel de resolución, 
+        \item{$\varepsilon_i$} es la señal de error de la $i$-ésima escala, y
+        \item{$K_i$} representa la ganancia para cada $i$-ésimo componente.
+    \end{eqexpl}
+        
+        % Si se toma como ejemplo el control \acrshort{pid} discreto y recordando la \cref{equa:getsignal.vi} que proporciona su señal de control,
+        
+    Se puede indicar la nueva expresión que utilice el enfoque de multiresolución, es decir
+    \begin{equation}
+        u_{k+1} = u_{k} + \sum\limits_{i=1}^{3} K_i \varepsilon_{k(i)}
+    \end{equation}
+    \begin{eqexpl}
+        \item{$k$}específica la época, y
+        \item{$\sum$}se limita a tres, pues es la cantidad de componentes en el contraloador PID.
+    \end{eqexpl}
+        
+    Como ya se dijo antes, la configuración del control PMR tiene la característica de emplear dos o más parámetros que dependen del nivel de resolución aplicada a la señal de error; la \cref{fig:structurePMR} muestra el diagrama empleado, mientras que el bloque de descomposición se ilustra en la \cref{fig:structure3levelsDescomp}.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = \textwidth]{graphics/pmr/Block PMR Structure.pdf}
+        \caption[Diagrama del controlador PMR en lazo cerrado.]{Diagrama del controlador PMR en lazo cerrado \cite[p. 48]{VegaNavarrete2013}.}
+        \label{fig:structurePMR}
+    \end{figure}
+        
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = 0.8\textwidth]{graphics/pmr/Filter Descomp 3 Levels.pdf}\\ \vspace*{0.5em}
+        \includegraphics[width = 0.8\textwidth]{graphics/pmr/Filter Sint 3 Levels.pdf}
+        \caption[Diagrama de análisis de tres niveles.]{Diagrama de descomposición y síntesis de tres niveles \cite[p. 47]{VegaNavarrete2013}.}
+        \label{fig:structure3levelsDescomp}
+    \end{figure}
+        
+     La expresión general para escalar los componentes es
+    \begin{align}
+        u &= K_{H}\varepsilon_{H} + K_{M_1}\varepsilon_{M_1} + \cdots + K_{i}\varepsilon_{i} + \cdots + K_{L}\varepsilon_{L}
+    \end{align}
+    que expresándola en su forma matricial se tiene
+    \begin{align}
+        u &= \mathbf{K}\odot\mathbf{E_m},\,\text{siendo} \\
+        \mathbf{K} &= 
+            \begin{bmatrix}
+                K_{H} & K_{M_1} & \cdots & K_{i} & \cdots & K_{L}
+            \end{bmatrix},\,\text{y}\\
+        \mathbf{E_m} &= 
+            \begin{bmatrix}
+                \varepsilon_{H} & \varepsilon_{M_1} & \cdots & \varepsilon_{i} & \cdots & \varepsilon_{L}
+            \end{bmatrix}.
+    \end{align}
+        
+    Finalmente, \citeauthor{VegaNavarrete2013} presenta las reglas de sintonización automática, las cuales están implícitas en las leyes del control anterior, por lo tanto se tiene
+    \begin{align}
+        K_{H}[k+1] &= (K_{H}[k]T + \mu_{H} \hat{\Gamma} (\varepsilon_H[k] - \varepsilon_H[k]))/T \\
+        K_{M_1}[k+1] &= (K_{M_1}[k-1]T + \mu_{M_1} \hat{\Gamma} (\varepsilon_{M_1}[k] - \varepsilon_{M_1}[k-1]))/T \\
+        &\vdots \\
+        K_{M_{N-1}}[k+1] &= (K_{M_{N-1}}[k-1]T + \mu_{M_{N-1}} \hat{\Gamma} (\varepsilon_{M_{N-1}}[k] - \varepsilon_{M_{N-1}}[k-1]))/T \\
+        K_{L}[k+1] &= (K_{L}[k-1]T + \mu_{L} \hat{\Gamma} (\varepsilon_L[k] - \varepsilon_L[k-1]))/T
+    \end{align}
+    donde
+    \begin{align}
+        \Gamma[k] &= \sum\limits_{i=0}^{M} c_i z[k-i]u[k]
+    \end{align}
+    y las $\mu$ se tratan de la taza de actualización o aprendizaje del controlador.
+
+        % Los resultados obtenidos en la \cref{sec:ident_fOut} fueron tomados como base, pues la configuración encontrada para la \textit{wavenet} ya cuenta con el entrenamiento, entonces sólo fue necesario realizar la operación dentro de línea para hallar los parámetros del nuevo controlador.
+\section{Identificación fuera línea}\label{sec:PMR_outline}
+        
+\section{Identificación en línea}\label{sec:PMR_online}

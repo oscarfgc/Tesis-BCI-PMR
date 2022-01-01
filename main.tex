@@ -1,0 +1,162 @@
+\documentclass[openright,twoside,12pt]{book}
+    \usepackage{upmhthesis}
+    \usepackage{lipsum}
+    % \usepackage[notref,notcite]{showkeys}
+    % \usepackage{showframe}
+    % \usepackage{draftwatermark}
+    %     \SetWatermarkText{\textsc{Borrador}}
+    %     \SetWatermarkScale{1}
+    %     \SetWatermarkAngle{55}
+    % ============================================================
+    % THESIS INFORMATION
+    % ============================================================
+    \title{Diseño de interfaz cerebro-computadora aplicada al control inteligente del helicóptero \textit{Quanser}}
+    \titleEN{Brain-computer interface design applied to the helicopter Quanser intelligent control}
+    
+    \subject{Diseño de un controlador para el modelo experimental de un helicóptero de 2GDL}
+    
+    \keywords{control, redes neuronales, quanser, wavelets, helicóptero}
+    \keywordsEN{control, artificial neural networks, wavelets, quanser, multiresolution}
+
+    \author{Ing. Oscar Federico García Castro}
+    \authorEN{Eng. Oscar Federico García Castro}
+    
+    \faculty{Maestría en Ingeniería Aeroespacial}
+    \facultyEN{Master in Aerospace Engineering}
+    
+    \university{Universidad Politécnica Metropolitana de Hidalgo}
+    \universityEN{Hidalgo Metropolitan Polytechnic University}
+    
+    \degree{Maestro en Ingeniería Aeroespacial}
+    \supervisor{M. en C. Marío Alejandro Vega Navarrete\\[3mm]
+                Dr. Luis Enrique Ramos Velasco}
+    \cityandyear{Tolcayuca, Hgo.\hfill Agosto, 2023}
+    \date{agosto, 2023}
+    \logouniversity{titlepage/UPMH Cut}
+    \logoconacyt{titlepage/conacyt}
+    \logofaculty{titlepage/mia}
+
+    \makeatletter\hypersetup{
+        pdftitle    = {\@title},
+        pdfsubject  = {\@subject},
+        pdfauthor   = {\@author},
+        pdfkeywords = {\@keywords},
+    }
+    
+    \newcommand{\Quanser}{\textit{Quanser}}
+% ================================================================
+% ================================================================
+\begin{document}
+% ================================================================
+    \selectlanguage{spanish}
+    \renewcommand\spanishtablename{Tabla}
+    \renewcommand{\listtablename}{Lista de tablas}
+    \renewcommand{\listfigurename}{Lista de figuras}
+    \addtocontents{toc}{~\hfill\textbf{Página}\\[-0.5em]}
+    
+    % ============================================================
+    % COVER AND TITLEPAGE
+    % ============================================================
+    \maketitle
+    
+    % ============================================================
+    % FRONTMATTER:  DEDICATION, DECLARATION, ACKNOWLEDGEMENTS,
+    %               ABSTRACT, LIST OF CONTENTS/FIGURES/TABLES.
+    % ============================================================
+    \frontmatter
+    \headerEmpty{~}
+    \renewcommand{\thepage}{\Roman{page}}
+    \include{frontmatter/declaration}
+    \include{frontmatter/abstract}
+    \include{frontmatter/acknowledgements}
+    \include{frontmatter/dedication}
+    
+    \bookmarksetup{startatroot}
+        \pagelinknum
+        \tableofcontents
+        \addcontentsline{toc}{section}{\contentsname}
+    
+    \bookmarksetup{startatroot}
+        \pagelinknum
+        \listoffigures
+        \addcontentsline{toc}{section}{\listfigurename}
+    
+    \bookmarksetup{startatroot}
+        \pagelinknum
+        \listoftables
+        \addcontentsline{toc}{section}{\listtablename}
+    % ============================================================
+    % THESIS CONTENT - CHAPTERS
+    % ============================================================
+    \mainmatter
+    \headerChapters
+    \formatchaptermain
+    % \formatsectionmain
+    \renewcommand{\headrulewidth}{1pt}
+    
+    % Rename chapter name PDF
+    \makeatletter
+        \bookmarksetup{
+            addtohook = {
+    	        \ifnum\toclevel@chapter = \bookmarkget{level}\relax
+    		        \renewcommand*{\numberline}[1]{\chaptername~#1.~}
+                \fi
+            },
+        }
+    \makeatother
+    
+    \include{mainmatter/introduction}
+    \include{mainmatter/state}
+    \include{mainmatter/theory}
+    \include{mainmatter/pmr}
+    \include{mainmatter/bci}
+    \include{mainmatter/conclusion}
+    
+    % ============================================================
+    % THESIS CONTENT - APPENDICES
+    % ============================================================
+    \appendix
+    \appendixsetup
+    
+    % Rename appendix name PDF
+    \makeatletter
+        \bookmarksetup{
+            addtohook = {
+                \ifnum\toclevel@chapter = \bookmarkget{level}\relax
+                    \renewcommand*{\numberline}[1]{\appendixname~#1.~}
+                \fi
+            },
+        }
+    \makeatother
+    \include{appendices/modelmath}
+    
+    % ============================================================
+    % BIBLIOGRAPHY
+    % ============================================================
+    % \nocite{*}
+    \nocite{Siuly2017}
+    \headerEmpty{Referencias}
+    \printbibliography[ title   = Referencias,
+                        heading = bibintoc]
+    % }
+    % ============================================================
+    % BACKMATTER: ABBREVIATIONS, ACRONYMS, GLOSSARIES, NOTATION
+    % ============================================================
+    \bookmarksetup{startatroot}
+    \pagelinknum
+    \printnomenclature[3cm]
+    \headerEmpty{Notación}
+    \addcontentsline{toc}{chapter}{\nomname}
+    
+    % \glsaddall
+    \printglossary[type  = \acronymtype,
+                   title = Acrónimos y abreviaturas, 
+                   style = super]
+    \headerEmpty{Acrónimos y abreviaturas}
+    
+    % \printglossary
+    % \headerEmpty{Glosario}
+% ================================================================
+% ================================================================
+\end{document}
+% ================================================================

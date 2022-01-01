@@ -1,0 +1,41 @@
+\initchapter{Marco teórico}\label{chap:theory}
+
+El presente capítulo desarrolla las bases teóricas y conceptuales de las áreas de interés para esta investigación.
+
+En primer lugar, la \cref{sec:theory bci} llamada \textit{Interfaz cerebro-computadora}, da una preámbulo sobre este tipo de sistemas para la decodificación de la actividad cerebral, también se hablan de los paradigmas utilizados y las regiones cerebrales de interés. Enseguida, se estudia la fisiología del cerebro humano para conocer sus partes, su funcionamiento y los aspectos relevantes para entender cómo operan los sensores electroencefalográficos, esto último es cubierto en el apartado \ref{sec:theory eeg fundamentals} titulado \textit{Fundamentos de la electroencefalografía}. 
+
+En segundo lugar, las secciones \ref{sec:theory rna} y \ref{sec:theory impulse filters} corresponden a las \textit{Redes neuronales artificiales} y los \textit{Filtros de respuesta de impulso}, donde se hablan de las nociones básicas para su aprovechamiento dentro de un esquema de control inteligente implementando bloques de identificación y auto-sintonización.
+
+Por último, se examina a la \textit{Teoría wavelet} dado que es la base para la aplicación de la técnica del \textit{Análisis multiresolución}, ya sea en el \textit{Tratamiento de la señales de electroencefalograma} o en el \textit{Control \acrlong{pmr}}, todo esto se abarca en los apartados \ref{sec:theory wavelet} a \ref{sec:theory pmr ctrl}, respectivamente.
+
+%     \begin{description}[noitemsep, nolistsep]
+%         \item[Electroencefalograma] Según \citet[p. 3]{siuly2016}, se trata de la medición del potencial eléctrico que refleja la actividad del cerebro humano, lo cual proporciona evidencia sobre el funcionamiento del mismo. Además, el estudio de estas variaciones eléctricas por medio de los registros de \acrshort{eeg} permite el diagnóstico de enfermedades neurológicas.
+        
+%         \item[Red neuronal artificial] \citet[p. 193]{poncecruz2010} afirma que, desde el punto de vista matemático, las redes neuronales se pueden considerar como aproximadores no lineales que simulan el funcionamiento del cerebro. Dicho de otra manera, se tratan de modelos computacionales y matemáticos conformados por unidades de procesamiento denominadas ``neuronas'' las cuales se acomodan en ``capas'' generando topologías que emulan la estructura del cerebro humano \cite{kim2017}.
+        
+%         \item[Análisis multiresolución] De acuerdo con \citet{parvez2015}, se refiere a un marco de trabajo que ayuda a representar de manera jerárquica funciones o señales a diferentes escalas, cuya idea es descomponer de forma recursiva una señal o función dada a través de un banco de filtros para mejorar su nivel de ``detalle'' o calidad \cite{kovacevic2013,vega2013}.
+        
+%         \item[Controlador proporcional multiresolución] Algunos autores \cite{vega2013,garciablancas2016} mencionan que se trata de un esquema de control similar al \acrlong{pid}, pero utilizando el análisis multiresolución para tratar la señal del error de seguimiento. Es decir, esta señal se descompone en diferentes frecuencias que ser escaladas y asociadas a las ganancias del controlador para ser sumadas, dando origen a una nueva señal de control.
+%     \end{description}
+
+\section{Interfaz cerebro-computadora}\label{sec:theory bci}
+
+    Cuando se habla de interfaces cerebro-computadora, se hace referencia a sistemas que miden las señales eléctricas o campos magnéticos del sistema nervioso central, convirtiendo esta información en salidas digitales para la manipulación de equipos electrónicos \cite{AlonsoValerdi2019,MoranGarcia2015}, por consiguiente se logra establecer un nexo de comunicación directa entre el cerebro humano y una máquina.
+
+\section{Fundamentos de la electroencefalografía}\label{sec:theory eeg fundamentals}
+
+\section{Redes neuronales artificiales}\label{sec:theory rna}
+
+\section{Filtros de respuesta de impulso}\label{sec:theory impulse filters}
+    
+\section{Teoría \textit{wavelet}}\label{sec:theory wavelet}
+
+    \begin{definition}[\textit{Wavelet} u Ondícula]
+        Una wavelet es una función $\psi\in\mathbb{R}^2$ solo si tiene un promedio de cero, es decir \[ \int_\mathbb{R}  \psi(t)\,dt = 0. \] Dicha función es llamada wavelet ``madre'' porque a partir de ella se genera una función de familias nombradas wavelets ``hijas''.
+    \end{definition}
+
+\section{Análisis multiresolución}\label{sec:theory multiresolution}
+
+\section{Tratamiento de las señales de electroencefalograma}\label{sec:theory pmr eeg}
+
+\section{Control proporcional multiresolución}\label{sec:theory pmr ctrl}
