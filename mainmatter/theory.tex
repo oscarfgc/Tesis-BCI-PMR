@@ -20,10 +20,46 @@ Por último, se examina a la \textit{Teoría wavelet} dado que es la base para l
 
 \section{Interfaz cerebro-computadora}\label{sec:theory bci}
 
-    Cuando se habla de interfaces cerebro-computadora, se hace referencia a sistemas que miden las señales eléctricas o campos magnéticos del sistema nervioso central, convirtiendo esta información en salidas digitales para la manipulación de equipos electrónicos \cite{AlonsoValerdi2019,MoranGarcia2015}, por consiguiente se logra establecer un nexo de comunicación directa entre el cerebro humano y una máquina.
+    En 1929 Hans Berger fue pionero en la aplicación de técnicas de electroencefalografía, pues logró registrar la actividad eléctrica cerebral interconectando electrodos en una trepanación con un galvanómetro \cite{Kuebler2019,BrandLab2019}. En ese momento se definió el principio de operación con el que se desarrollarían a las primeras interfaces cerebro-computadora (\acrshort{bci}) aprovechando a los avances tecnológicos y médicos de los años siguientes.
     
-    \citet{AlvarezLopez2010} menciona que existen cuatro tipos de interfaces: activas, reactivas, pasivas e híbridas.
+    Pero hasta la década de 1960, Thelma Estrin dio instrucciones para la construcción del \textit{sistema de computación digital electroencefalográfico}, el cual fue capaz de transmitir señales cerebrales a la computadora. Después, en los años de 1970, Jacques J. Vidal publicó un artículo con recomendaciones técnicas para la creación de un equipo más sofisticado \cite{Kuebler2019}.
+    
+    Actualmente, diversas compañías y universidades investigan el uso de los sistemas BCI en temas de neurorehabilitación. Aunque, también se realizan estudios para la diversificación en sus campos de aplicación, tal es el caso del sector aeroespacial, donde se han diseñado métodos para pilotar aeronaves mentalmente. 
 
+    \subsection{¿Qué es una interfaz cerebro-computadora?}
+    
+        Cuando se habla de interfaces cerebro-computadora, se hace referencia a sistemas que miden las señales eléctricas o campos magnéticos del sistema nervioso central, convirtiendo esta información en salidas digitales para la manipulación de equipos electrónicos \cite{AlonsoValerdi2019,MoranGarcia2015}, por lo tanto, el fin de un sistema BCI es generar un nexo de comunicación directa entre el cerebro humano y una máquina (v. \cref{fig:bci basic structure}).
+        
+        \begin{figure}[htb!]
+            \centering
+            \input{tikz/theory/bci_basic_structure}
+            \caption[Estructura general de un sistema BCI]{Estructura general de un sistema BCI. En algunas configuraciones se omite el bloque de ``retroalimentación''. Diagrama elaborado a partir de \cite[Fig. 2]{SanchezGarcia2017}}
+            \label{fig:bci basic structure}
+        \end{figure}
+        
+    \subsection{Clasificación}
+    
+        \citet{AlonsoValerdi2019} menciona que existen cuatro tipos de interfaces: activas, reactivas, pasivas e híbridas (v. \cref{fig:bci types}), los cuales se describen enseguida \cite[p. 5]{AlonsoValerdi2019}:
+        % \begin{description}[noitemsep, nolistsep]
+        %     \item[Sistemas activos] Son aquellos donde el usuario controla de manera consciente las salidas del sistema.
+        %     \item[Sistemas reactivos] .
+        %     \item[Sistemas pasivos] .
+        %     \item[Sistemas híbridos] .
+        % \end{description}
+    
+        \begin{figure}[htb!]
+            \centering
+            \input{tikz/theory/bci_types}
+            \caption[Clasificación de interfaces cerebro-computadora]{Clasificación de interfaces cerebro-computadora. Diagrama elaborado a partir de \cite[Fig. 1]{AlonsoValerdi2019}.}
+            \label{fig:bci types}
+        \end{figure}
+        
+    \subsection{Aplicaciones}
+    
+    \subsection{Paradigmas utilizados}
+    
+    
+    
 \section{Fundamentos de la electroencefalografía}\label{sec:theory eeg fundamentals}
 
 \section{Redes neuronales artificiales}\label{sec:theory rna}
@@ -32,9 +68,9 @@ Por último, se examina a la \textit{Teoría wavelet} dado que es la base para l
     
 \section{Teoría \textit{wavelet}}\label{sec:theory wavelet}
 
-    \begin{definition}[\textit{Wavelet} u Ondícula]
-        Una wavelet es una función $\psi\in\mathbb{R}^2$ solo si tiene un promedio de cero, es decir \[ \int_\mathbb{R}  \psi(t)\,dt = 0. \] Dicha función es llamada wavelet ``madre'' porque a partir de ella se genera una función de familias nombradas wavelets ``hijas''.
-    \end{definition}
+    % \begin{definition}[\textit{Wavelet} u Ondícula]
+    %     Una wavelet es una función $\psi\in\mathbb{R}^2$ solo si tiene un promedio de cero, es decir \[ \int_\mathbb{R}  \psi(t)\,dt = 0. \] Dicha función es llamada wavelet ``madre'' porque a partir de ella se genera una función de familias nombradas wavelets ``hijas''.
+    % \end{definition}
 
 \section{Análisis multiresolución}\label{sec:theory multiresolution}
 

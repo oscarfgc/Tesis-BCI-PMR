@@ -1,0 +1,118 @@
+
+\definecolor{actives}{HTML}{000957}
+\definecolor{reactives}{HTML}{9B0000}
+\definecolor{pasives}{HTML}{3F0071}
+\definecolor{hybrids}{HTML}{FFD523}
+
+\tikzset{
+    parent/.style          = {align = center, text width = 2.5cm, rounded corners = 3pt},
+    child/.style           = {align = center, text width = 2.5cm, rounded corners = 3pt},
+    grandchild/.style      = {align = center, text width = 4.0cm, rounded corners = 3pt},
+    greatgrandchild/.style = {align = center, text width = 5.0cm, rounded corners = 3pt},
+    referenceblock/.style  = {align = center, text width = 1.5cm, rounded corners = 2pt}
+}
+
+\resizebox{\textwidth}{!}{
+    \begin{forest}
+        for tree = {
+            forked edges,
+            grow' = 0,
+            draw,
+            rounded corners,
+            node options = {align = center,},
+            text width = 2.7cm,
+        },
+        [Interfaces cerebro computadora, fill = black, text = white, parent
+            [Activas, for tree = {fill = actives!45, child}
+                [Movimientos Imaginarions, fill = actives!30, grandchild
+                    [Potenciales Corticales Lentos, fill = actives!20, greatgrandchild]
+                    [Potenciales Corticales Relacionados a Movimientos, fill = actives!20, greatgrandchild]
+                    [Nivel de Sincronización Neuronal, fill = actives!20, greatgrandchild]
+                    [Potencia de las Señales EEG, fill = actives!20, greatgrandchild]
+                ]
+                [Rotación Mental de Cuerpos 3D, fill = actives!30, grandchild]
+                [Lingüística Mental, fill = actives!30, grandchild]
+                [Musicalización Interna, fill=actives!30, grandchild]
+            ]
+            [Reactivas, for tree = {fill = reactives!45, child}
+                [P300, fill = reactives!30, grandchild]
+                [Potenciales Evocados, fill = reactives!30, grandchild
+                    [Visuales, fill = reactives!20, greatgrandchild]
+                    [Auditivos, fill = reactives!20, greatgrandchild]
+                    [Somato sensoriales, fill = reactives!20, greatgrandchild]
+                ]
+            ]
+            [Pasivas, for tree = {fill = pasives!45, child}
+                [Ansiedad, fill = pasives!30, grandchild]
+                [Fatiga, fill = pasives!30, grandchild]
+                [Frustración, fill = pasives!30, grandchild]
+                [Atención, fill = pasives!30, grandchild]
+            ]
+            [Híbridas, for tree = {fill = hybrids!45, child}
+                [Combinación de Sistemas, fill = hybrids!30, grandchild
+                    [Movimientos Imaginarios y P300, fill = hybrids!20, greatgrandchild]
+                    [Potenciales Evocados Visuales y Tareas Mentales, fill = hybrids!20, greatgrandchild]
+                ]
+                [Combinación de Señales, fill = hybrids!30, grandchild
+                    [EEG Y ECG, fill = hybrids!20, greatgrandchild]
+                    [EEG y EMG, fill = hybrids!20, greatgrandchild]
+                ]
+            ]
+        ]
+    \end{forest}
+}
+
+% \definecolor{main_idea}{HTML}{3E8E7E}
+% \definecolor{second_idea}{HTML}{7CD1B8}
+% \definecolor{third_idea}{HTML}{FABB51}
+% \definecolor{fourth_idea}{HTML}{FAEDC6}
+
+% \resizebox{0.85\textwidth}{!}{
+% \begin{tikzpicture}[
+%     mindmap,
+%     grow cyclic,
+%     every node/.style = {concept, circular drop shadow},
+%     level 1 concept/.append style = {sibling angle = 360/4, level distance = 10em},
+%     level 2 concept/.append style = {sibling angle = 45},
+%     level 3 concept/.append style = {sibling angle = 40},
+%     extra concept/.append style = {text = black}]
+
+%     % BCI Systems - Main Idea
+%     \path[mindmap, concept color = main_idea, text = black] node[concept] {Interfaces cerebro computadora} [clockwise from = 45]
+    
+%         % Active systems
+%         child[concept color = second_idea] { node[concept] {Activos} [clockwise from = 130]
+%             child[concept color = third_idea] { node[concept] {Movimientos Imaginarios} [clockwise from = -120]
+%                 child[concept color = fourth_idea] { node[concept] {Potenciales Corticales Lentos} }
+%                 child[concept color = fourth_idea] { node[concept] {Potenciales Corticales Relacionados al Movimiento} }
+%                 child[concept color = fourth_idea] { node[concept] {Nivel de Sincronización Neuronal} }
+%                 child[concept color = fourth_idea] { node[concept] {Potencia de las señales EEG} }
+%             }
+%             child[concept color = third_idea] { node[concept] {Rotación Mental de Cuerpos 3D} }
+%             child[concept color = third_idea] { node[concept] {Lingüística Mental} }
+%             child[concept color = third_idea] { node[concept] {Musicalización Interna} }
+%         }
+%         child[concept color = second_idea] { node[concept] {Reactivos} [clockwise from = 45]
+%             child[concept color = third_idea] { node[concept] {P300} }
+%             child[concept color = third_idea] { node[concept] {Potenciales Evocados en Estado Estable} }
+%             child[concept color = third_idea] { node[concept] {Potenciales Evocados} }
+%         }
+%         child[concept color = second_idea] { node[concept] {Pasivos} [clockwise from = -20]
+%             child[concept color = third_idea] { node[concept] {Ansiedad} }
+%             child[concept color = third_idea] { node[concept] {Fatiga} }
+%             child[concept color = third_idea] { node[concept] {Frustración} }
+%             child[concept color = third_idea] { node[concept] {Atención} }
+%         }
+%         child[concept color = second_idea] { node[concept] {Híbridos} [clockwise from = -135]
+%             child[concept color = third_idea] { node[concept] {Combinación de sistemas} [clockwise from = -45]
+%                 child[concept color = fourth_idea] { node[concept] {Movimientos Imaginarios y P3000} }
+%                 child[concept color = fourth_idea] { node[concept] {Potenciales Evocados Visuales y Tareas Mentales} }
+%             }
+%             child[concept color = third_idea] { node[concept] {Combinación de señales} [clockwise from = 90]
+%                 child[concept color = fourth_idea] { node[concept] {EEG Y ECG} }
+%                 child[concept color = fourth_idea] { node[concept] {EEG y EMG} }
+%             }
+%         }
+%     ;
+% \end{tikzpicture}
+% }

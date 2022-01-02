@@ -26,7 +26,7 @@
 % \RequirePackage{pstricks}
 \RequirePackage[all]{xy}
 
-\RequirePackage{xcolor,graphicx,tikz} % Images, plots, colors
+\RequirePackage{xcolor,graphicx,tikz,varwidth} % Images, plots, colors
 \RequirePackage{lmodern,emptypage}
 \RequirePackage{float,subcaption}
 \RequirePackage[margin = 15pt, font = small, labelfont = bf]{caption}
@@ -46,6 +46,8 @@
 \RequirePackage[spanish]{nomencl}
 \RequirePackage[acronym,toc,nonumberlist]{glossaries}
 \RequirePackage{listings}
+
+\RequirePackage[edges]{forest}
 
 \RequirePackage{makeidx}
 \RequirePackage{tablefootnote,threeparttable,longtable,multicol,multirow}
@@ -424,6 +426,7 @@
     \usetikzlibrary{decorations.pathreplacing}
     \usetikzlibrary{arrows, decorations.markings}
     \usetikzlibrary{fadings}
+    \usetikzlibrary{mindmap,trees,backgrounds,shadows}
     \AtBeginEnvironment{tikzpicture}{\shorthandoff{>}
         \shorthandoff{<}}{}{}
     

@@ -1,0 +1,17 @@
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[node distance = 3.5cm, >=latex, line width = 1pt]
+    \tikzstyle{block} = [draw, fill = blue!10, shape = rounded rectangle, inner sep = 1pt, minimum height = 2cm, minimum width = 3cm]
+        
+    \node[inner sep = 0pt] (brain) at (0,0) {\includegraphics[width = 2cm]{graphics/bci/brain_ico.png}};
+    \node[block, right of = brain] (getSignal) {\begin{varwidth}{2cm}\centering Adquisición de la señal cerebral\end{varwidth}};
+    \node[block, right of = getSignal, node distance = 6cm] (process) {\begin{varwidth}{2cm}\centering Tratamiento de la señal cerebral\end{varwidth}};
+    \node[right of = process, node distance = 5cm] (robot) {\includegraphics[width = 2cm]{graphics/bci/robotic_arm.png}};
+    \node[block, above of = brain, node distance = 2cm, xshift = 7cm, minimum height = 1cm] (feedback) {\begin{varwidth}{4cm}\centering Retroalimentación\end{varwidth}};
+
+    \draw[->, line width = 3pt] (brain) -- (getSignal);
+    \draw[->, line width = 3pt] (getSignal) -- node[midway, yshift = 10pt] {Digitalización} (process);
+    \draw[->, line width = 3pt] (process) -- node[midway, yshift = 10pt] {Comandos} (robot);
+    \draw[->, line width = 3pt] (robot) |- (feedback);
+    \draw[->, line width = 3pt] (feedback) -| (brain);
+\end{tikzpicture}
+}

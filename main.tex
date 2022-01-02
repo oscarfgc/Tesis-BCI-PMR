@@ -3,10 +3,10 @@
     \usepackage{lipsum}
     % \usepackage[notref,notcite]{showkeys}
     % \usepackage{showframe}
-    % \usepackage{draftwatermark}
-    %     \SetWatermarkText{\textsc{Borrador}}
-    %     \SetWatermarkScale{1}
-    %     \SetWatermarkAngle{55}
+    \usepackage{draftwatermark}
+        \SetWatermarkText{\textsc{Borrador}}
+        \SetWatermarkScale{1}
+        \SetWatermarkAngle{55}
     % ============================================================
     % THESIS INFORMATION
     % ============================================================
@@ -154,8 +154,8 @@
                    style = super]
     \headerEmpty{Acrónimos y abreviaturas}
     
-    % \printglossary
-    % \headerEmpty{Glosario}
+    \printglossary[title = Glosario]
+    \headerEmpty{Glosario}
 % ================================================================
 % ================================================================
 \end{document}
